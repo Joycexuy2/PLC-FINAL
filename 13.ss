@@ -102,7 +102,7 @@
 (define 1st car)
 (define 2nd cadr)
 (define 3rd caddr)
-(define 4rd cadddr)
+(define 4th cadddr)
 
 ;;(define parse-exp         
 ;  (lambda (datum)
@@ -401,6 +401,14 @@
                                    (eval-rands (map (lambda (x) (caddr x)) vars) env)
                                    env)])
           (eval-bodies bodies new-env))]
+      [if-exp (test-exp then-exp else-exp)
+        (if (eval-exp test-exp env)
+          (eval-exp then-exp env)
+          (eval-exp else-exp env))]
+        [if-else-exp (test-exp then-exp else-exp)
+        (if (eval-exp test-exp env)
+          (eval-exp then-exp env)
+          (eval-exp else-exp env))]
 
 ;;      [quote-exp (datum) datum]
       [else (eopl:error 'eval-exp "Bad abstract syntax: ~a" exp)])))
@@ -537,8 +545,3 @@
 
 (define eval-one-exp
   (lambda (x) (top-level-eval (parse-exp x))))
-
-
-
-
-
