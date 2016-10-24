@@ -58,6 +58,11 @@
                          ((list-of improper?) y))) x)))
       (bodiess (lambda (x) (or ((list-of expression?) x) ((list-of (list-of expression?)) x))))
       (letrec-bodies (list-of expression?))]
+    [letrec-exp-improper
+      (proc-names (list of symbol?))
+      (idss (lambda (x) (or (list-of (list-of symbol?)))))
+      (bodies (list-of expression?))
+      (letrec-body (lambda (x) (or (expression? x) ((list-of expression?) x))))]
    [let-named-exp (name symbol?)
        (ids (list-of symbol?))
        (vals (list-of expression?))
