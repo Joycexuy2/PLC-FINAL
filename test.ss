@@ -21,7 +21,12 @@
     (proc-names (list-of symbol?))
     (idss (lambda (x) (or ((list-of symbol?) x)(pair? x))))
     (bodiess (lambda (x) (or ((list-of expression?) x) ((list-of (list-of expression?)) x))))
-    (env environment?)])
+    (env environment?)]
+  [recursively-extended-env-record-improper
+    (proc-names (list-of symbol?))
+    (idss (lambda (x) (or ((list-of symbol?) x)(pair? x))))
+    (bodiess (list-of expression?))
+    (old-env environment?)])
 
 (define-datatype expression expression?
     [var-exp ; variable references
@@ -391,9 +396,9 @@
     (recursively-extended-env-record
       proc-names idss bodiess old-env)))
 
-(define extend-env-recursively-improper
-  (lambda (proc-names improper proper old-env)
-    (recursively-extended-env-record-improper proc-names improper proper old-env)))
+;(define extend-env-recursively-improper
+;  (lambda (proc-names improper proper old-env)
+;    (recursively-extended-env-record-improper proc-names improper proper old-env)))
 
 (define get-improper-first
   (lambda (ls)
